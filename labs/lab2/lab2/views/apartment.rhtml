@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="large-12 columns">
+		<h3>Apartment: #<%= params['apartment_id'].to_i + 1 %></h3>
+		<p>
+			Footage: <%= @apartment.footage %>
+		</p>
+		<p>
+			Rooms in the apartment: <%= @apartment.number_of_rooms %>
+		</p>
+		<p>
+			Adress: <%= @apartment.adress.return_adress %>
+		</p>
+		<p>
+			Floor: <%= @apartment.floor %>
+		</p>
+		<p>
+			Type of house: <%= @apartment.type %>
+		</p>
+		<p>
+			Floors in the house: <%= @apartment.number_of_floors %>
+		</p>
+		<p>
+			Price: <%= @apartment.price %> RUB
+		</p>
+		<p>
+			Exchange Conditions: <%= @apartment.exchange_conditions.return_conditions %>
+		</p>
+		<div class="row">
+			<div class="large-12 columns" align="left">
+				<a class="button" href="<%= params['apartment_id'] %>/edit">
+					Edit
+				</a>
+				<a class="button" href="<%= params['apartment_id'] %>/delete">
+					Delete
+				</a>
+				<a class="button" href="<%= params['apartment_id'] %>/search/results">
+					Search for an offer
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

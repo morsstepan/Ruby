@@ -1,0 +1,14 @@
+Footage,Rooms,District,Street,Apartment,Floor,Apartment_type,Floors,Price,Wanted_district,Wanted_street,Wanted_floor
+85,2,Zavolzhsky,Saukova,12,3,brick,5,2150000,Dzerzhinsky,Urickogo,1
+115,4,Dzerzhinsky,Shavirina,28,4,panel,5,3210000,Zavolzhsky,Papanina,1
+85,2,Zavolzhsky,Papanina,51,1,panel,5,1300000,Dzerzhinsky,Shavirina,4
+34,1,Zavolzhsky,Papanina,54,1,panel,5,1200000,Dzerzhinsky,Shavirina,4
+120,3,Zavolzhsky,Souznaya,31,4,brick,5,4400400,Neftestroy,Neftyanikov,1
+225,5,Leninsky,Lenina,55,5,panel,12,7240000,Dzerzhinsky,Urickogo,1
+85,2,Dzerzhinsky,Panina,12,3,panel,5,2100000,Leninsky,Lenina,5
+185,4,Leninsky,Lenina,132,5,brick,5,21300000,Zavolzhsky,Saukova,3
+120,3,Leninsky,Lenina,112,4,brick,5,21300000,Neftestroy,Neftyanikov,3
+85,2,Neftestroy,Neftyanikov,1,1,brick,5,1806000,Zavolzhsky,Souznaya,4
+53,1,Zavolzhsky,Souznaya,51,4,panel,5,1400400,Neftestroy,Neftyanikov,1
+53,1,Dzerzhinsky,Urickogo,51,1,brick,5,1800000,Zavolzhsky,Saukova,3
+185,3,Zavolzhsky,Saukova,12,3,panel,5,4240000,Dzerzhinsky,Urickogo,1

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="large-12 columns">
+    <form action="/videos/<%= params['video_id'] %>/edit" method="post">
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Film title:
+            <input type="text" name="name" placeholder="<%= @video.name %>">
+
+          </label>
+        </div>
+        <div class="large-12 columns">
+          <label>Release date:
+            <input type="number" name="release_date" placeholder="<%= @video.release_date %>">
+
+          </label>
+        </div>
+        <div class="large-12 columns">
+          <label>Director name:
+            <input type="text" name="director_name" placeholder="<%= @video.director_name %>">
+
+          </label>
+        </div>
+        <div class="large-12 columns">
+          <label>Link:
+            <input type="text" name="link" placeholder="<%= @video.link %>">
+          </label>
+        </div>
+        <div class="large-12 columns">
+          <label>Annotation:
+            <p><textarea rows="10" cols="45" name="annotation" placeholder="Annotation"></textarea></p>
+          </label>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <input type="submit" class="button" value="Save">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

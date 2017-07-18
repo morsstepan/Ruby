@@ -1,0 +1,69 @@
+<form method="post" action="/apartments">
+  <div class="row">
+    <h3> 
+      New apartment:
+    </h3>
+    <div class="large-12 columns">
+      <label>Footage:
+        <input type="number" value="footage" placeholder="100">
+      </label>
+    </div>
+    <div class="large-12 columns">
+      <label>Number of rooms: 
+        <input type="number" name="number_of_rooms" placeholder="3">
+      </label>
+      <h4>Adress:</h4>
+	    <label>District:
+	      <input type="text" name="adress_district" placeholder="Leninsky">  
+	    </label>
+	    <label>Street:
+	      <input type="text" name="adress_street" placeholder="Lenina">
+	    </label>
+	    <label>Number:
+	      <input type="number" name="adress_number" placeholder="52">
+	    </label>
+	  </div>
+	  <div class="large-12 columns">
+	  	<label>Floor:
+	   		<input type="number" name="floor" placeholder="5">
+	   	</label>
+	  </div>
+	  <div class="large-6 columns">
+	    <label>Type of house
+	      <select name="type" required>
+	              <option value="brick">Brick</option>
+	              <option value="panel">Panel</option>
+	      </select>
+	    </label>
+	  </div>
+	  <div class="large-12 columns">
+	  	<label>Floors in the house: 
+	   		<input type="number" name="number_of_floors" placeholder="5">
+	   	</label>
+	  </div>
+	  <div class="large-12 columns">
+	  	<label>Price:
+	  		<input type="number" name="price" placeholder="5000000">
+	  	</label>
+	  </div>	 
+	  <div class="large-12 columns">
+	  	<h4>Exchange conditions:</h4> 
+		  	<label>District:
+		  		<input type="text" name="condition_district" placeholder="Zavolzhsky">
+		  	</label>
+		  	<label>Street:
+		  		<input type="text" name="condition_street" placeholder="Saukova">
+		  	</label>			  
+		  	<label>Floor:
+		 		<input type="number" name="condition_floor" placeholder="4">
+		   	</label>	  	 		
+	  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns text-right">
+      <a href="/" class="default button">Cancel</a>
+      <input class="success button" type="submit" value="Send">
+    </div>
+  </div>
+</form>

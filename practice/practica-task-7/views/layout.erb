@@ -1,0 +1,27 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-приложение Степана Морозова</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div class="top-bar">
+      <ul class="menu">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/input">Форма для ввода данных</a></li>
+        <li><a href="/results">Результаты вычислений</a></li>
+        <li><a href="/about">О разработчике</a></li>
+      </ul>
+    </div>
+    <br><br>
+    <%= yield%>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

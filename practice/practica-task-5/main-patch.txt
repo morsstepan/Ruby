@@ -1,0 +1,442 @@
+# В основе пятой практической было взяло практическое задание со второй недели 
+# обучения.
+# Изменил названия переменных, добвил пробелы, исправил отступы
+
+# Изменил название файла с lab-ruby2 на lab_ruby2
+
+3,5c3,5
+<     sum = 0
+<     payments.each { |a| sum+=a[:amount] }
+<     sum.round(2)
+---
+>   sum = 0
+>   payments.each { |payment| sum += payment[:amount] }
+>   sum.round(2)
+6a7
+> 
+
+# Убрал инициализацию неиспользуемого массива
+
+8,10c9,10
+<     months = []
+<     months = payments.uniq { |a| a[:payed_for]}
+<     months
+---
+>   months = payments.uniq { |payment| payment[:payed_for] }
+>   months
+11a12
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby
+
+13,17c14,21
+<     month_array = payments.group_by { |row| row[:payed_for] }    
+<     payed_for_each_month = month_array.each_with_object({}) do |(month, rows), totals|
+<         totals[month] = rows.reduce(0.0) { |sum, row| sum + row[:amount].to_f }.round(2)
+<     end 
+<     payed_for_each_month
+---
+>   month_array = payments.group_by { |row| row[:payed_for] }
+>   payed_for_each_month =
+>     month_array.each_with_object({}) do |(month, rows), totals|
+>       totals[month] = rows.reduce(0.0) do |sum, row|
+>         sum.round(2) + row[:amount].to_f.round(2)
+>       end
+>     end
+>   payed_for_each_month
+18a23
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby
+
+20,30c25,35
+<     last_month = payments.max_by {|x| x[:payed_for]}
+<     max = 0
+<     payments.each{|a|
+<         if(a[:payed_for] == last_month[:payed_for])
+<             if max < a[:amount]
+<                 max = a[:amount]
+<             end
+<         end
+<     }
+<     result = "The last month is " + last_month[:payed_for].to_s + "\n" + "The maximum payment in #{last_month[:payed_for]} is " + max.round(2).to_s 
+< end 
+---
+>   last_month = payments.max_by { |x| x[:payed_for] }
+>   max = 0
+>   payments.each do |payment|
+>     if payment[:payed_for] == last_month[:payed_for]
+>       max = payment[:amount] if max < payment[:amount]
+>     end
+>   end
+>   result = "The max payment in #{last_month[:payed_for]} is #{max.round(2)}"
+>   result
+> end
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby, избавился от длинной строки
+
+32,38c37,42
+<     sum=0
+<     payments.each{|x|
+<         if(x[:payed_for] == month)
+<             sum+=x[:amount]
+<         end
+<     }
+<     result = "The total amount of payments in #{month} is " +  sum.round(2).to_s
+---
+>   sum = 0
+>   payments.each do |payment|
+>     sum += payment[:amount] if payment[:payed_for] == month
+>   end
+>   result = "The total amount of payments in #{month} is " + sum.round(2).to_s
+>   result
+39a44
+> 
+
+# Изменил строку разделения, уменьшил длину фактической строки.
+
+41c46
+<     puts ("--------------------------------------------------------------------------------")
+---
+>   puts '-' * 80
+43,59c48,75
+
+# Разбил на методы чтение из файла, добавил все проверки, авто-корректировку, уменьшил длину строк.
+
+< def combine_files_to_array(payments)
+<     payments = []
+<     unless (ARGV.empty?)
+<         ARGV.each do |file_name|
+<             puts "Processing file #{file_name}"
+<             if (File.exists?(file_name))
+<                 if(File.zero?(file_name))
+<                     puts "WARNING! #{file_name} is empty"
+<                 end
+<                 payments += read_file(file_name)
+<             else
+<                 puts "Error! #{file_name} not found!"
+<             end
+<         end
+<     end
+<     ARGV.clear
+<     payments
+---
+> 
+> def process_file
+>   result = []
+>   ARGV.each do |file_name|
+>     # puts "Processing file #{file_name}"
+>     # if File.exist?(file_name)
+>     #   puts "WARNING! #{file_name} is empty" if File.zero?(file_name)
+>     #   result += read_file(file_name)
+>     # else puts "Error! #{file_name} not found!"
+>     # end
+>     check_file(file_name)
+>     result += read_file(file_name)
+>   end
+>   result
+> end
+> 
+> def combine_files_to_array
+>   payments = []
+>   if ARGV.empty?
+>     puts 'Specify a file as an argument'
+>     exit
+>   else
+>     payments = process_file
+>   end
+>   ARGV.clear
+>   # payments = process_file unless ARGV.empty?
+>   # ARGV.clear
+>   payments
+60a77
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby и добавил методы для проверки входных файлов.
+
+62,72c79,132
+<     result = []
+<     CSV.foreach(file_name, { headers: true }) do |row|
+<         result.push({
+<             payed_on: row["Payment date"],
+<             payed_for: row["Payable month"],
+<             house_type: row["House"],
+<             apartment: row["Apartment"],
+<             amount: row["Amount of payment"].to_f 
+<         })
+<     end
+<     result
+---
+>   result = []
+>   CSV.foreach(file_name, headers: true) do |row|
+>     result.push(payed_on: row['Payment date'],
+>                 payed_for: row['Payable month'],
+>                 house_type: row['House'],
+>                 apartment: row['Apartment'],
+>                 amount: row['Amount of payment'].to_f)
+>   end
+>   result
+> end
+> 
+> def file_empty?(file_name)
+>   puts "A file #{file_name} is empty\n" if File.zero?(file_name)
+>   finish? if File.zero?(file_name)
+> end
+> 
+> def file_exists?(file_name)
+>   puts "Error! A file #{file_name} not found!" unless File.exist?(file_name)
+>   exit unless File.exist?(file_name)
+> end
+> 
+> def finish?
+>   puts 'Do you want to stop this program? (y/n)'
+>   case $stdin.gets.strip
+>   when 'y'
+>     exit
+>   when 'n'
+>     return
+>   else
+>     puts 'Error!'
+>     exit
+>   end
+> end
+> 
+> def check_file(file_name)
+>   puts "Processing file #{file_name}"
+>   file_exists?(file_name)
+>   file_empty?(file_name)
+>   unexpected_symbols?(file_name)
+> end
+> 
+> def unexpected_symbols?(file_name)
+>   CSV.foreach(file_name, headers: true) do |row|
+>     finish? if validation(row['Amount of payment']) == true
+>   end
+> end
+> 
+> def validation(a)
+>   !Float(a)
+> rescue
+>   puts "A file has unexpected symbol '#{a}'!"
+>   puts "WARNING: If you choose 'n', problem lines will be auto-corrected!"
+>   puts "For example, a field '#{a}' will be auto-corrected to '#{a.to_f}'"
+>   return true
+73a134
+> 
+
+# Добавил очистку консоли на операционной системе Linux
+
+75c136,137
+<     system "cls"
+---
+>   system 'cls'
+>   # system 'clear'
+77c139,217
+
+# Убрал бесполезный метод help, создал метод для вывода доступных опций в программе. Также создал методы для каждой опции: option_one, option_two... Изменил проверку входного месяца.
+
+< def help
+---
+> 
+> def print_options
+>   cls_console
+>   puts "This program is created for working with payments \n"
+>   puts "You have to enter a number for choosing the option \n"
+>   puts "[0] The total amount of payments for now\n"
+>   puts "[1] The total amount of payments for each payed month\n"
+>   puts "[2] The maximum payment for the last payed month\n"
+>   puts "[3] The total amount of payments for the specified payed month\n"
+>   puts "[4] Exit\n"
+>   print_line
+> end
+> 
+> def option_zero(payments)
+>   cls_console
+>   print_line
+>   puts 'You have selected the option #0'
+>   print_line
+>   puts "The total amount of payments for now: #{payed_for_now(payments)}"
+>   menu(payments)
+> end
+> 
+> def option_one(payments)
+>   cls_console
+>   print_line
+>   puts 'You have selected the option #1'
+>   print_line
+>   puts "Here is the total of payments for each payed month: \n"
+>   months = payed_for_each_month(payments)
+>   months.each { |a| p a }
+>   menu(payments)
+> end
+> 
+> def option_two(payments)
+>   cls_console
+>   print_line
+>   puts 'You have selected the option #2'
+>   print_line
+>   puts maximum_payment_for_the_last_month(payments)
+>   menu(payments)
+> end
+> 
+> def option_three(payments)
+>   cls_console
+>   print_line
+>   puts 'You have selected the option #3'
+>   choose_month(payments)
+>   print_line
+>   menu(payments)
+> end
+> 
+> def unexpected_option(payments)
+>   puts 'Error! Check your input data, please.'
+>   menu(payments)
+> end
+> 
+> def choose_month(payments)
+>   puts "Please, specify the month (for example, 2014-08)\n"
+>   print_line
+>   puts 'Available months are: '
+>   months = create_month_array(payments)
+>   months.each { |a| puts a[:payed_for] }
+>   print_line
+>   month = gets.chomp
+>   print_line
+>   process_month(month, months, payments)
+> end
+> 
+> def check_month(month, months)
+>   error = false
+>   months.each do |x|
+>     error = (month == x[:payed_for]) if error == false
+>   end
+>   error
+> end
+> 
+> def process_month(month, months, payments)
+>   error = check_month(month, months)
+>   if error == true
+79,86c219,224
+
+# Удалил ненужный метод.
+
+<     puts "- This program is created for working with payments \n"
+<     puts "- Press 0 to show the total amount of payments for now \n"
+<     puts "- Press 1 to show the total amount of payments for each payed month \n"
+<     puts "- Press 2 to show the maximum payment for the last payed month \n"
+<     puts "- Press 3 to show the total amount of payments for the specified payed month \n"
+<     puts "WARNING: You have to specify the month (for example, 2014-08)\n"
+<     puts "- Press 4 to show the help \n"
+<     puts "- Press 5 to exit from program \n"
+---
+>     sum = payed_for_specified_month(payments, month)
+>     puts sum
+>   else
+>     puts 'You have written an incorrect month.'
+>     puts 'Please, pay attention on the available months.'
+>   end
+87a226
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby. Разбил на методы длинные методы. Привел меню к читаемому виду.
+
+89,152c228,237
+<     print_line
+<     puts "This program is created for working with payments \n"
+<     puts "You have to enter a number for choosing the option \n"
+<     puts "[0] The total amount of payments for now\n"
+<     puts "[1] The total amount of payments for each payed month\n"
+<     puts "[2] The maximum payment for the last payed month\n"
+<     puts "[3] The total amount of payments for the specified payed month\n"
+<     puts "[4] Exit\n"
+<     print_line
+<     choose=gets.chomp
+<     case choose
+<     when '0'
+<         cls_console
+<         print_line
+<         puts "You have selected the option #0"
+<         print_line
+<         puts "Here is the total amount of payments for now: " + payed_for_now(payments).to_s
+<         menu(payments)
+<         
+<     when '1'
+<         cls_console
+<         print_line
+<         puts "You have selected the option #1"
+<         print_line
+<         puts "Here is the total of payments for each payed month: \n"
+<         months = payed_for_each_month(payments)
+<         months.each{|a| p a}
+<         menu(payments)
+<     when '2'
+<         cls_console
+<         print_line
+<         puts "You have selected the option #2"
+<         print_line
+<         puts maximum_payment_for_the_last_month(payments)
+<         menu(payments)
+<     when '3'
+<         cls_console
+<         print_line
+<         puts "You have selected the option #3"
+<         print_line
+<         puts "Please, specify the month (for example, 2014-08)\n"
+<         print_line
+<         puts "Available months are: "
+<         months = create_month_array(payments)
+<         months.each{|a| puts a[:payed_for]}
+<         print_line
+<         month=gets.chomp
+<         print_line
+<         error = false
+<         months.each{|x| error = (month == x[:payed_for])}
+<         if(error == true)
+<             cls_console
+<             sum = payed_for_specified_month(payments, month)
+<             puts sum
+<         else
+<             puts "You have written an incorret month. Please, pay attention on the available months."
+<         end
+<         menu(payments)
+<     when '4'
+<         exit
+<     else
+<         puts 'Error! Check your input data, please.'
+<         menu(payments)
+< end
+---
+>   print_options
+>   choice = gets.chomp
+>   case choice
+>   when '0' then option_zero(payments)
+>   when '1' then option_one(payments)
+>   when '2' then option_two(payments)
+>   when '3' then option_three(payments)
+>   when '4' then exit
+>   else unexpected_option(payments)
+>   end
+153a239
+> 
+
+# Преобразовал код согласно правилам оформления программы на Ruby
+
+155,158c241,244
+<     puts "This program has been created by Stepan Morozov\n"
+<     print_line
+<     payments = combine_files_to_array(payments)
+<     menu(payments)
+---
+>   puts "This program has been created by Stepan Morozov\n"
+>   print_line
+>   payments = combine_files_to_array
+>   menu(payments)
+160c246
+
+# Преобразовал код согласно правилам оформления программы на Ruby
+
+< main
+\ В конце файла нет новой строки
+---
+> main

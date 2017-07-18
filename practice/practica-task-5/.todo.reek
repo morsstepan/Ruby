@@ -1,0 +1,41 @@
+---
+DuplicateMethodCall:
+  exclude:
+  - file_empty?
+  - file_exists?
+  - maximum_payment_for_the_last_month
+NestedIterators:
+  exclude:
+  - payed_for_each_month
+TooManyStatements:
+  exclude:
+  - initialize
+  - choose_month
+  - combine_files_to_array
+  - maximum_payment_for_the_last_month
+  - menu
+  - option_one
+  - option_three
+  - option_two
+  - option_zero
+  - payed_for_each_month
+  - print_options
+  - process_month
+UncommunicativeParameterName:
+  exclude:
+  - validation
+UncommunicativeVariableName:
+  exclude:
+  - check_month
+  - choose_month
+  - maximum_payment_for_the_last_month
+  - option_one
+UtilityFunction:
+  exclude:
+  - check_month
+  - create_month_array
+  - maximum_payment_for_the_last_month
+  - payed_for_each_month
+  - payed_for_now
+  - payed_for_specified_month
+  - read_file

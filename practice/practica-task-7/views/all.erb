@@ -1,0 +1,14 @@
+<div class="row">
+  <h3 align="center">История запросов: </h3>
+  <br>
+  <div class="large-8 large-offset-2">
+    <% for @result in @results %>
+      <%= erb :show %>
+    <% end %>
+    <% if @result.nil? or @results.nil? %>
+     	<div class=callout>
+    		<p> Вы пока что не сделали никаких запросов </p>
+     	</div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+require 'rubocop/rake_task'
+require 'rake/testtask'
+
+task default: :check
+
+task check: %i[rubocop test]
+
+RuboCop::RakeTask.new
+
+Rake::TestTask.new do |task|
+  task.test_files = FileList['test/**/test_*.rb']
+  task.warning = false
+end
+
+task :main do
+  ruby('lib/application.rb', 'data/data.csv', 'data/data1.csv')
+end

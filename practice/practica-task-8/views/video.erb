@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="large-12 columns">
+		<h3>Film title: <%= @video.name %></h3>
+		<p>
+			Release date: <%= @video.release_date %>
+		</p>
+		<p>
+			Director name: <%= @video.director_name %>
+		</p>
+		<p>
+			Link: 
+			<a href="<%= @video.link %>"><%= @video.link %></a>
+		</p>
+		<p>
+			Annotation: <%= @video.annotation %>
+		</p>
+		<div class="row">
+			<div class="large-12 columns" align="left">
+				<a class="button" href="<%= params['video_id'] %>/edit">
+					Edit
+				</a>
+				<a class="button" href="<%= params['video_id'] %>/delete">
+					Delete
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

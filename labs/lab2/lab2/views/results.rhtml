@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="large-8 large-offset-2 columns">
+    <% if @sorted_apartments.empty? %>
+      <div class="callout">
+        <p>Unfortinutaly, there are no offers.</p>
+      </div>
+    <% else %>
+      <% @sorted_apartments.each_with_index do |apartment, index| %>
+        <div class="callout">
+          <div class="row">
+            <div class="large-8 columns">
+              Apartment: #<%= index + 1 %>
+            <hr>
+            </div>
+            <div class="large-8 columns">
+              Adress: <%= apartment.adress.return_adress %>
+            </div>
+            <div class="large-8 columns">
+              Exchange conditions: <%= apartment.exchange_conditions.return_conditions %>
+            </div>
+            <div class="large-8 columns">
+              Surcharge: <%= apartment.surcharge %>
+            </div>            
+            <div class="large-2 columns text-left">
+              <a class="button" href="/save_apartment">
+                Contact
+              </a> 
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class ="row">
+      <div class="large-2 columns text-center">
+        <a class="button" href="/apartments/<%= @apartment_id %>">
+          Back
+        </a> 
+      </div>
+    </div>
+  </div>
+</div>
