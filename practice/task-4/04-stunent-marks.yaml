@@ -1,0 +1,52 @@
+---
+students:
+  - id: 0
+    name: Ivan
+    education_year: 4
+  - id: 1
+    name: Maria
+    education_year: 4
+  - id: 2
+    name: Pavel
+    education_year: 4
+  - id: 5
+    name: Natalia
+    education_year: 4
+  - id: 6
+    name: Stepan
+    education_year: 2
+courses:
+  - name: Biology
+    grades:
+      - student_id: 0
+        grade: 5
+      - student_id: 1
+        grade: 4
+      - student_id: 2
+        grade: 5
+  - name: Mathematics
+    grades:
+      - student_id: 0
+        grade: 4
+      - student_id: 2
+        grade: 1
+      - student_id: 5
+        grade: 4
+      - student_id: 6
+        grade: 5
+  - name: Ethics
+    grades:
+      - student_id: 6
+        grade: 5
+      - student_id: 2
+        grade: 2
+  - name: Russian literature
+    grades:
+      - student_id: 0
+        grade: 2
+      - student_id: 6
+        grade: 4
+      - student_id: 2
+        grade: 3
+
+
